@@ -21,6 +21,8 @@ typedef struct tagR1323665_1_022_2018_KDF2_CONTEXT
 
     unsigned long mac_size; /**< Size of `mac` output in bytes */
 
+    void* user_context; /**< User-defined context, that is passed to all following functions */
+
     /**
      * @brief Initializes key for `mac`.
      * 
@@ -29,9 +31,10 @@ typedef struct tagR1323665_1_022_2018_KDF2_CONTEXT
      * buffer MUST be able to hold an output of the function.
      * 
      * @param key binary key
+     * @param user_context pointer to `user_context`
      * @param out pointer to `key_buffer`
      */
-    void (*initialize_key)(const unsigned char* key, unsigned char* out);
+    void (*initialize_key)(const unsigned char* key, void* user_context, unsigned char* out);
 
     /**
      * @brief Performs formattion of KDF parameters.
@@ -46,20 +49,23 @@ typedef struct tagR1323665_1_022_2018_KDF2_CONTEXT
      * @param u U parameter
      * @param a A parameter
      * @param l L parameter
+     * @param user_context pointer to `user_context`
      * @param out pointer to `format_buffer`
      */
     void (*format)(const unsigned char* z, unsigned long c, const unsigned char* p,
                    const unsigned char* u, const unsigned char* a, const unsigned char* l,
-                   unsigned char* out);
+                   void* user_context, unsigned char* out);
 
     /**
      * @brief Calculates MAC of formatted parameters.
      * 
      * @param key pointer to `key_buffer`
      * @param in pointer to `format_buffer`
+     * @param user_context pointer to `user_context`
      * @param out pointer to a shifted `out` parameter of `kdf2` function
      */
-    void (*mac)(const unsigned char* key, const unsigned char* in, unsigned char* out);
+    void (*mac)(const unsigned char* key, const unsigned char* in,
+                void* user_context, unsigned char* out);
 } R1323665_1_022_2018_KDF2_CONTEXT;
 
 

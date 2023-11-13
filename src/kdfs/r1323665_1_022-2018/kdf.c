@@ -11,7 +11,7 @@ void kdf2(const unsigned char* key, const unsigned char* iv, const unsigned char
           const unsigned char* u, const unsigned char* a, unsigned long derived_key_size,
           R1323665_1_022_2018_KDF2_CONTEXT* context, unsigned char* out)
 {
-    context->initialize_key(key, context->key_buffer);
+    context->initialize_key(key, context->user_context, context->key_buffer);
     kdf2_perform(iv, l, p, u, a, derived_key_size, context, out);
 }
 
@@ -36,8 +36,8 @@ void kdf2_perform(const unsigned char* iv, const unsigned char* l, const unsigne
 
     for (; counter < iterations; ++counter)
     {
-        context->format(z, counter, p, u, a, l, context->format_buffer);
-        context->mac(context->key_buffer, context->format_buffer, out);
+        context->format(z, counter, p, u, a, l, context->user_context, context->format_buffer);
+        context->mac(context->key_buffer, context->format_buffer, context->user_context, out);
 
         z = out;
         out += context->mac_size;
