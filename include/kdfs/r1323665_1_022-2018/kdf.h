@@ -85,7 +85,6 @@ typedef struct tagR1323665_1_022_2018_KDF2_CONTEXT
  * @param p P parameter
  * @param u U parameter
  * @param a A parameter
- * @param derived_key_size size of derived key in bytes
  * @param context initialized kdf(2) context
  * @param out pointer to derived key
  */
