@@ -19,13 +19,15 @@ void kdf2_perform(const unsigned char* iv, unsigned long long l, const unsigned 
                   const unsigned char* a, R1323665_1_022_2018_KDF2_CONTEXT* context, unsigned char* out)
 {
     //
-    // Calculate required number of iterations
+    // Calculate required number of iterations.
+    // L represents key length in bits, hence, I need to
+    // convert it into bytes before further processing.
     //
 
-    const unsigned long long iterations = l / context->mac_size;
+    const unsigned long long iterations = (l >> 3) / context->mac_size;
 
     //
-    // Now perform iterations
+    // Now perform iterations!
     // Well... KDF itself is not quite complicated
     //
 
