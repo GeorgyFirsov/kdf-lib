@@ -7,31 +7,29 @@
 #include "common/utils.h"
 
 
-void kdf2(const unsigned char* key, const unsigned char* iv, const unsigned char* l, const unsigned char* p,
-          const unsigned char* u, const unsigned char* a, unsigned long derived_key_size,
-          R1323665_1_022_2018_KDF2_CONTEXT* context, unsigned char* out)
+void kdf2(const unsigned char* key, const unsigned char* iv, unsigned long long l, const unsigned char* p,
+          const unsigned char* u, const unsigned char* a, R1323665_1_022_2018_KDF2_CONTEXT* context, unsigned char* out)
 {
     context->initialize_key(key, context->user_context, context->key_buffer);
-    kdf2_perform(iv, l, p, u, a, derived_key_size, context, out);
+    kdf2_perform(iv, l, p, u, a, context, out);
 }
 
 
-void kdf2_perform(const unsigned char* iv, const unsigned char* l, const unsigned char* p, const unsigned char* u,
-                  const unsigned char* a, unsigned long derived_key_size, R1323665_1_022_2018_KDF2_CONTEXT* context,
-                  unsigned char* out)
+void kdf2_perform(const unsigned char* iv, unsigned long long l, const unsigned char* p, const unsigned char* u,
+                  const unsigned char* a, R1323665_1_022_2018_KDF2_CONTEXT* context, unsigned char* out)
 {
     //
     // Calculate required number of iterations
     //
 
-    const unsigned long iterations = derived_key_size / context->mac_size;
+    const unsigned long long iterations = l / context->mac_size;
 
     //
     // Now perform iterations
     // Well... KDF itself is not quite complicated
     //
 
-    unsigned long counter  = 0;
+    unsigned long long counter  = 0;
     const unsigned char* z = iv;
 
     for (; counter < iterations; ++counter)

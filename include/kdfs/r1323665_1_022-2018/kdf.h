@@ -19,7 +19,7 @@ typedef struct tagR1323665_1_022_2018_KDF2_CONTEXT
     unsigned char* key_buffer;    /**< Buffer for `initialize_key` function output */
     unsigned char* format_buffer; /**< Buffer for `format` function output */
 
-    unsigned long mac_size; /**< Size of `mac` output in bytes */
+    unsigned long long mac_size; /**< Size of `mac` output in bytes */
 
     void* user_context; /**< User-defined context, that is passed to all following functions */
 
@@ -52,8 +52,8 @@ typedef struct tagR1323665_1_022_2018_KDF2_CONTEXT
      * @param user_context pointer to `user_context`
      * @param out pointer to `format_buffer`
      */
-    void (*format)(const unsigned char* z, unsigned long c, const unsigned char* p,
-                   const unsigned char* u, const unsigned char* a, const unsigned char* l,
+    void (*format)(const unsigned char* z, unsigned long long c, const unsigned char* p,
+                   const unsigned char* u, const unsigned char* a, unsigned long long l,
                    void* user_context, unsigned char* out);
 
     /**
@@ -89,18 +89,16 @@ typedef struct tagR1323665_1_022_2018_KDF2_CONTEXT
  * @param context initialized kdf(2) context
  * @param out pointer to derived key
  */
-void kdf2(const unsigned char* key, const unsigned char* iv, const unsigned char* l, const unsigned char* p,
-          const unsigned char* u, const unsigned char* a, unsigned long derived_key_size,
-          R1323665_1_022_2018_KDF2_CONTEXT* context, unsigned char* out);
+void kdf2(const unsigned char* key, const unsigned char* iv, unsigned long long l, const unsigned char* p,
+          const unsigned char* u, const unsigned char* a, R1323665_1_022_2018_KDF2_CONTEXT* context, unsigned char* out);
 
 
 /**
  * @brief Performs actual action of kdf(2) part of R1323665.1.022-2018 KDF. 
  *        This function exists for testing purposes. 
  */
-void kdf2_perform(const unsigned char* iv, const unsigned char* l, const unsigned char* p, const unsigned char* u,
-                  const unsigned char* a, unsigned long derived_key_size, R1323665_1_022_2018_KDF2_CONTEXT* context,
-                  unsigned char* out);
+void kdf2_perform(const unsigned char* iv, unsigned long long l, const unsigned char* p, const unsigned char* u,
+                  const unsigned char* a, R1323665_1_022_2018_KDF2_CONTEXT* context, unsigned char* out);
 
 
 #ifdef __cplusplus
