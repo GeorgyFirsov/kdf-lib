@@ -8,12 +8,15 @@ AccessModifierOffset: -4
 AlignAfterOpenBracket: Align
 AlignArrayOfStructures: Left
 AlignConsecutiveAssignments: true
-AlignEscapedNewlines: Left
+AlignConsecutiveMacros:
+    Enabled: true
+    AcrossEmptyLines: true
+    AcrossComments: true
+AlignEscapedNewlines: Right
 AlignOperands: AlignAfterOperator
 AlignTrailingComments: true
 
 AllowAllArgumentsOnNextLine: true
-AllowAllConstructorInitializersOnNextLine: false
 AllowAllParametersOfDeclarationOnNextLine: true
 AllowShortBlocksOnASingleLine: Empty
 AllowShortCaseLabelsOnASingleLine: false
@@ -69,7 +72,7 @@ ColumnLimit: 0
 ConstructorInitializerIndentWidth: 4
 ContinuationIndentWidth: 4
 
-Cpp11BracedListStyle: false
+Cpp11BracedListStyle: true
 
 DeriveLineEnding: false
 DerivePointerAlignment: false
@@ -82,7 +85,7 @@ FixNamespaceComments: true
 IncludeBlocks: Preserve
 
 IndentAccessModifiers: false
-IndentCaseBlocks: true
+IndentCaseBlocks: false
 IndentCaseLabels: false
 IndentExternBlock: false
 IndentGotoLabels: false
@@ -106,6 +109,8 @@ MaxEmptyLinesToKeep: 4
 NamespaceIndentation: None
 
 PPIndentWidth: 3
+
+PackConstructorInitializers: Never
 
 PenaltyBreakAssignment: 50
 PenaltyBreakBeforeFirstCallParameter: 50
