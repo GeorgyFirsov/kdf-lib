@@ -23,8 +23,7 @@ set(KDFLIB_TESTS_INCLUDE_DIRECTORIES	        ${KDFLIB_INCLUDE_DIRECTORIES}
 set(KDFLIB_SOURCE_FILES                         )
 
 set(KDFLIB_HEADER_FILES                         ${KDFLIB_TESTS_INCLUDE}/test_data.hpp
-                                                ${KDFLIB_TESTS_INCLUDE}/test_common.hpp
-                                                ${KDFLIB_TESTS_INCLUDE}/test_utils.hpp)
+                                                ${KDFLIB_TESTS_INCLUDE}/test_common.hpp)
 
 set(KDFLIB_SOURCES                              ${KDFLIB_SOURCE_FILES}
                                                 ${KDFLIB_HEADER_FILES})

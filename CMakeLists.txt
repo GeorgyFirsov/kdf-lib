@@ -177,18 +177,6 @@ if (KDFLIB_BUILD_LIB)
 
 
     #
-    # Link with dependencies
-    #
-    target_link_libraries(kdf-lib PRIVATE                galois-lib) 
-    target_link_libraries(kdf-lib PRIVATE                bc-lib) 
-
-    if (BCLIB_BUILD_KERNEL_LIB)
-        target_link_libraries(kdf-lib-km PRIVATE         galois-lib-km)
-        target_link_libraries(kdf-lib-km PRIVATE         bc-lib-km)
-    endif (BCLIB_BUILD_KERNEL_LIB)
-
-
-    #
     # On non-Windows builds it is necessary to add some intrinsics support
     #
     if (NOT KDFLIB_WINDOWS_BUILD)

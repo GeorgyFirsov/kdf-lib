@@ -7,16 +7,18 @@
 #include "common/utils.h"
 
 
-void kdf2(const unsigned char* key, const unsigned char* iv, unsigned long long l, const unsigned char* p,
-          const unsigned char* u, const unsigned char* a, R1323665_1_022_2018_KDF2_CONTEXT* context, unsigned char* out)
+void r1323665_1_022_2018_kdf2(const unsigned char* key, const unsigned char* iv, unsigned long long l,
+                              const unsigned char* p, const unsigned char* u, const unsigned char* a,
+                              R1323665_1_022_2018_KDF2_CONTEXT* context, unsigned char* out)
 {
     context->initialize_key(key, context->user_context, context->key_buffer);
-    kdf2_perform(iv, l, p, u, a, context, out);
+    r1323665_1_022_2018_kdf2_perform(iv, l, p, u, a, context, out);
 }
 
 
-void kdf2_perform(const unsigned char* iv, unsigned long long l, const unsigned char* p, const unsigned char* u,
-                  const unsigned char* a, R1323665_1_022_2018_KDF2_CONTEXT* context, unsigned char* out)
+void r1323665_1_022_2018_kdf2_perform(const unsigned char* iv, unsigned long long l, const unsigned char* p,
+                                      const unsigned char* u, const unsigned char* a,
+                                      R1323665_1_022_2018_KDF2_CONTEXT* context, unsigned char* out)
 {
     //
     // Calculate required number of iterations.
@@ -31,8 +33,8 @@ void kdf2_perform(const unsigned char* iv, unsigned long long l, const unsigned 
     // Well... KDF itself is not quite complicated
     //
 
-    unsigned long long counter  = 0;
-    const unsigned char* z = iv;
+    unsigned long long counter = 0;
+    const unsigned char* z     = iv;
 
     for (; counter < iterations; ++counter)
     {

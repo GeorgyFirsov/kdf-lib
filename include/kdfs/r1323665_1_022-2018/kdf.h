@@ -88,16 +88,18 @@ typedef struct tagR1323665_1_022_2018_KDF2_CONTEXT
  * @param context initialized kdf(2) context
  * @param out pointer to derived key
  */
-void kdf2(const unsigned char* key, const unsigned char* iv, unsigned long long l, const unsigned char* p,
-          const unsigned char* u, const unsigned char* a, R1323665_1_022_2018_KDF2_CONTEXT* context, unsigned char* out);
+void r1323665_1_022_2018_kdf2(const unsigned char* key, const unsigned char* iv, unsigned long long l,
+                              const unsigned char* p, const unsigned char* u, const unsigned char* a,
+                              R1323665_1_022_2018_KDF2_CONTEXT* context, unsigned char* out);
 
 
 /**
  * @brief Performs actual action of kdf(2) part of R1323665.1.022-2018 KDF. 
  *        This function exists for testing purposes. 
  */
-void kdf2_perform(const unsigned char* iv, unsigned long long l, const unsigned char* p, const unsigned char* u,
-                  const unsigned char* a, R1323665_1_022_2018_KDF2_CONTEXT* context, unsigned char* out);
+void r1323665_1_022_2018_kdf2_perform(const unsigned char* iv, unsigned long long l, const unsigned char* p,
+                                      const unsigned char* u, const unsigned char* a,
+                                      R1323665_1_022_2018_KDF2_CONTEXT* context, unsigned char* out);
 
 
 #ifdef __cplusplus
