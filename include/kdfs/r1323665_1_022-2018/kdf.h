@@ -12,6 +12,26 @@ extern "C" {
 
 
 /**
+ * @brief Enumeration of possible kdf(1) internal implementations.
+ * 
+ * All these implementation variants are defined in R1323665.1.022-2018.
+ */
+typedef enum tagR1323665_1_022_2018_KDF1_FUNCTION
+{
+    r1323665_1_022_2018_kdf1_function_xor = 3, /**< Use third construction in kdf(1) */
+} R1323665_1_022_2018_KDF1_FUNCTION;
+
+
+/**
+ * @brief Context for kdf(1) part of R1323665.1.022-2018 KDF.
+ */
+typedef struct tagR1323665_1_022_2018_KDF1_CONTEXT
+{
+    R1323665_1_022_2018_KDF1_FUNCTION function; /**< Internal implementation variant */
+} R1323665_1_022_2018_KDF1_CONTEXT;
+
+
+/**
  * @brief Context for kdf(2) part of R1323665.1.022-2018 KDF.
  */
 typedef struct tagR1323665_1_022_2018_KDF2_CONTEXT
@@ -67,6 +87,26 @@ typedef struct tagR1323665_1_022_2018_KDF2_CONTEXT
     void (*mac)(const unsigned char* key, const unsigned char* in,
                 void* user_context, unsigned char* out);
 } R1323665_1_022_2018_KDF2_CONTEXT;
+
+
+/**
+ * @brief Performs kdf(1) part of R1323665.1.022-2018 KDF.
+ * 
+ * @param key master key
+ * @param t T parameter (salt)
+ * @param context initialized kdf(1) context
+ * @param out pointer to intermediate key
+ */
+void r1323665_1_022_2018_kdf1(const unsigned char* key, const unsigned char* t,
+                              R1323665_1_022_2018_KDF1_CONTEXT* context, unsigned char* out);
+
+
+/**
+ * @brief Performs actual action of kdf(1) part of R1323665.1.022-2018 KDF. 
+ *        This function exists for testing purposes. 
+ */
+void r1323665_1_022_2018_kdf1_perform(const unsigned char* key, const unsigned char* t,
+                                      R1323665_1_022_2018_KDF1_CONTEXT* context, unsigned char* out);
 
 
 /**

@@ -180,8 +180,7 @@ if (KDFLIB_BUILD_LIB)
     # On non-Windows builds it is necessary to add some intrinsics support
     #
     if (NOT KDFLIB_WINDOWS_BUILD)
-        target_compile_options(kdf-lib PRIVATE 			-mpclmul)
-        target_compile_options(kdf-lib PRIVATE          -msse4.1)
+        target_compile_options(kdf-lib PRIVATE          -msse2)
     endif (NOT KDFLIB_WINDOWS_BUILD)
 
 endif (KDFLIB_BUILD_LIB)
