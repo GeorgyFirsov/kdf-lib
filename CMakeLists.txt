@@ -130,12 +130,8 @@ if (KDFLIB_BUILD_LIB)
     #
     set(KDFLIB_KDFS_SOURCES_DIR						    ${KDFLIB_SOURCES_ROOT}/kdfs)
     set(KDFLIB_KDFS_INCLUDE_DIR						    ${KDFLIB_INCLUDE_ROOT}/kdfs)
-    set(KDFLIB_COMMON_INCLUDE_DIR						${KDFLIB_INCLUDE_ROOT}/common)
 
-    set(KDFLIB_INTERNAL_INCLUDE_DIRECTORIES             ${KDFLIB_INCLUDE_DIRECTORIES}
-                                                        ${KDFLIB_COMMON_INCLUDE_DIR}
-                                                        ${bc-lib_SOURCE_DIR}/include
-                                                        ${galois-lib_SOURCE_DIR}/include)
+    set(KDFLIB_INTERNAL_INCLUDE_DIRECTORIES             ${KDFLIB_INCLUDE_DIRECTORIES})
 
     set(KDFLIB_R1323665_1_022-2018_SOURCES_DIR			${KDFLIB_KDFS_SOURCES_DIR}/r1323665_1_022-2018)
     set(KDFLIB_R1323665_1_022-2018_INCLUDE_DIR			${KDFLIB_KDFS_INCLUDE_DIR}/r1323665_1_022-2018)
@@ -146,7 +142,6 @@ if (KDFLIB_BUILD_LIB)
     set(KDFLIB_SOURCE_FILES								${KDFLIB_R1323665_1_022-2018_SOURCES_DIR}/kdf.c)
 
     set(KDFLIB_HEADER_FILES								${KDFLIB_R1323665_1_022-2018_INCLUDE_DIR}/kdf.h
-                                                        ${KDFLIB_COMMON_INCLUDE_DIR}/utils.h
                                                         ${KDFLIB_INCLUDE_ROOT}/kdflib.h)
 
     set(KDFLIB_SOURCES									${KDFLIB_SOURCE_FILES}

@@ -12,23 +12,41 @@ extern "C" {
 
 
 /**
- * @brief Enumeration of possible kdf(1) internal implementations.
- * 
- * All these implementation variants are defined in R1323665.1.022-2018.
- * For now, only third function is implemented.
- */
-typedef enum tagR1323665_1_022_2018_KDF1_FUNCTION
-{
-    r1323665_1_022_2018_kdf1_function_xor = 3, /**< Use third construction in kdf(1) */
-} R1323665_1_022_2018_KDF1_FUNCTION;
-
-
-/**
  * @brief Context for kdf(1) part of R1323665.1.022-2018 KDF.
  */
 typedef struct tagR1323665_1_022_2018_KDF1_CONTEXT
 {
-    R1323665_1_022_2018_KDF1_FUNCTION function; /**< Internal implementation variant */
+    unsigned char* key_buffer; /**< Buffer for `initialize_key` function output */
+
+    void* user_context; /**< User-defined context, that is passed to all following functions */
+
+    /**
+     * @brief Initializes key for `derive_key`.
+     * 
+     * Note, that this function's `out` parameter points to
+     * `key_buffer` member of this structure, hence, the
+     * buffer MUST be able to hold an output of the function.
+     * 
+     * @param key binary key
+     * @param user_context pointer to `user_context`
+     * @param out pointer to `key_buffer`
+     */
+    void (*initialize_key)(const unsigned char* key, void* user_context, unsigned char* out);
+
+    /**
+     * @brief Initializes key for `mac`.
+     * 
+     * Note, that this function's `out` parameter points to
+     * `key_buffer` member of this structure, hence, the
+     * buffer MUST be able to hold an output of the function.
+     * 
+     * @param key binary key
+     * @param t T parameter
+     * @param user_context pointer to `user_context`
+     * @param out pointer to `out` parameter of `kdf1` function
+     */
+    void (*derive_key)(const unsigned char* key, const unsigned char* t,
+                       void* user_context, unsigned char* out);
 } R1323665_1_022_2018_KDF1_CONTEXT;
 
 
@@ -106,8 +124,8 @@ void r1323665_1_022_2018_kdf1(const unsigned char* key, const unsigned char* t,
  * @brief Performs actual action of kdf(1) part of R1323665.1.022-2018 KDF. 
  *        This function exists for testing purposes. 
  */
-void r1323665_1_022_2018_kdf1_perform(const unsigned char* key, const unsigned char* t,
-                                      R1323665_1_022_2018_KDF1_CONTEXT* context, unsigned char* out);
+void r1323665_1_022_2018_kdf1_perform(const unsigned char* t, R1323665_1_022_2018_KDF1_CONTEXT* context,
+                                      unsigned char* out);
 
 
 /**
@@ -122,7 +140,7 @@ void r1323665_1_022_2018_kdf1_perform(const unsigned char* key, const unsigned c
  * @param key intermediate key
  * @param iv initialization vector (its size matches the size of `z` 
  *           parameter of `R1323665_1_022_2018_KDF2_CONTEXT::format`)
- * @param l L parameter
+ * @param l L parameter (length in bits of a key to derive)
  * @param p P parameter
  * @param u U parameter
  * @param a A parameter
