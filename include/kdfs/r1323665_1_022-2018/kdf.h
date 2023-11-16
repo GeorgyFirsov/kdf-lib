@@ -15,6 +15,7 @@ extern "C" {
  * @brief Enumeration of possible kdf(1) internal implementations.
  * 
  * All these implementation variants are defined in R1323665.1.022-2018.
+ * For now, only third function is implemented.
  */
 typedef enum tagR1323665_1_022_2018_KDF1_FUNCTION
 {
