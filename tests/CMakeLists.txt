@@ -20,10 +20,11 @@ set(KDFLIB_TESTS_INCLUDE_DIRECTORIES	        ${KDFLIB_INCLUDE_DIRECTORIES}
 #
 # Sources and headers
 #
-set(KDFLIB_SOURCE_FILES                         )
+set(KDFLIB_SOURCE_FILES                         ${KDFLIB_TESTS_CASES}/r1323665_1_022-2018.cpp)
 
 set(KDFLIB_HEADER_FILES                         ${KDFLIB_TESTS_INCLUDE}/test_data.hpp
-                                                ${KDFLIB_TESTS_INCLUDE}/test_common.hpp)
+                                                ${KDFLIB_TESTS_INCLUDE}/test_common.hpp
+                                                ${KDFLIB_TESTS_INCLUDE}/test_utils.hpp)
 
 set(KDFLIB_SOURCES                              ${KDFLIB_SOURCE_FILES}
                                                 ${KDFLIB_HEADER_FILES})
