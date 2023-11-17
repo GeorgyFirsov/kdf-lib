@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5.0)
-project(kdf-lib VERSION 1.0.1)
+project(kdf-lib VERSION 1.0.0)
 
 #
 # Global config
