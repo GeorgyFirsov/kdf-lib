@@ -128,7 +128,8 @@ KDFLIB_TESTS_ALIGN16 constexpr unsigned char kdf1_expected_key[] = {
     0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
     0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
     0xef, 0xef, 0xef, 0xef, 0xef, 0xef, 0xef, 0xef,
-    0xef, 0xef, 0xef, 0xef, 0xef, 0xef, 0xef, 0xef};
+    0xef, 0xef, 0xef, 0xef, 0xef, 0xef, 0xef, 0xef
+};
 
 
 /**
@@ -138,7 +139,8 @@ KDFLIB_TESTS_ALIGN16 constexpr unsigned char kdf2_expected_key[] = {
     0xff, 0xfe, 0xfd, 0xfc, 0xfb, 0xfa, 0xf9, 0xf8,
     0xf7, 0xf7, 0xf5, 0xf4, 0xf3, 0xf2, 0xf1, 0xf0,
     0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-    0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f};
+    0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f
+};
 
 }  // namespace test::r1323665_1_022_2018
 
@@ -146,18 +148,20 @@ KDFLIB_TESTS_ALIGN16 constexpr unsigned char kdf2_expected_key[] = {
 
 TEST(R1323665_1_022_2018, Kdf1)
 {
-    KDFLIB_TESTS_ALIGN16 unsigned char key_buffer[sizeof(test::data::master_key)] = {0};
+    KDFLIB_TESTS_ALIGN16 unsigned char key_buffer[sizeof(test::data::master_key)] = { 0 };
 
     test::r1323665_1_022_2018::UserContext user_context = {
-        .key_size = sizeof(key_buffer)};
+        .key_size = sizeof(key_buffer)
+    };
 
     R1323665_1_022_2018_KDF1_CONTEXT kdf_context = {
         .key_buffer     = key_buffer,
         .user_context   = &user_context,
         .initialize_key = test::r1323665_1_022_2018::initialize_key,
-        .derive_key     = test::r1323665_1_022_2018::derive_key};
+        .derive_key     = test::r1323665_1_022_2018::derive_key
+    };
 
-    KDFLIB_TESTS_ALIGN16 unsigned char key[sizeof(test::data::master_key)] = {0};
+    KDFLIB_TESTS_ALIGN16 unsigned char key[sizeof(test::data::master_key)] = { 0 };
     r1323665_1_022_2018_kdf1(test::data::master_key, test::r1323665_1_022_2018::t,
                              &kdf_context, key);
 
@@ -168,12 +172,13 @@ TEST(R1323665_1_022_2018, Kdf1)
 
 TEST(R1323665_1_022_2018, Kdf2)
 {
-    KDFLIB_TESTS_ALIGN16 unsigned char key_buffer[sizeof(test::data::master_key)]    = {0};
-    KDFLIB_TESTS_ALIGN16 unsigned char format_buffer[sizeof(unsigned long long) * 6] = {0};
+    KDFLIB_TESTS_ALIGN16 unsigned char key_buffer[sizeof(test::data::master_key)]    = { 0 };
+    KDFLIB_TESTS_ALIGN16 unsigned char format_buffer[sizeof(unsigned long long) * 6] = { 0 };
 
     test::r1323665_1_022_2018::UserContext user_context = {
         .key_size    = sizeof(key_buffer),
-        .format_size = sizeof(format_buffer)};
+        .format_size = sizeof(format_buffer)
+    };
 
     R1323665_1_022_2018_KDF2_CONTEXT kdf_context = {
         .key_buffer     = key_buffer,
@@ -182,9 +187,10 @@ TEST(R1323665_1_022_2018, Kdf2)
         .user_context   = &user_context,
         .initialize_key = test::r1323665_1_022_2018::initialize_key,
         .format         = test::r1323665_1_022_2018::format,
-        .mac            = test::r1323665_1_022_2018::mac};
+        .mac            = test::r1323665_1_022_2018::mac
+    };
 
-    KDFLIB_TESTS_ALIGN16 unsigned char key[sizeof(test::data::master_key)] = {0};
+    KDFLIB_TESTS_ALIGN16 unsigned char key[sizeof(test::data::master_key)] = { 0 };
     r1323665_1_022_2018_kdf2(test::data::master_key,
                              test::r1323665_1_022_2018::iv,
                              test::r1323665_1_022_2018::l,
